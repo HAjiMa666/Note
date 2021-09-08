@@ -154,14 +154,16 @@
                     age:18,
                     age:[1,2,3,4],
 
-                    // 下面在{}什么都不显示
-                    // 为什么React不让他们显示
-                    // 因为有些时候会在{}做判断,如果判断为真或者为假,可能会有让他们显示为null或undefined,这样子的话,就可以让内容不进行渲染在页面上
-                    // 但如果要显示他们的话,可以将他们转换为字符串
-                    // 转换为字符串的三种方法
-                    // 1. String();
-                    // 2. 利用字面量 后面加上 "",用这个比较方便
-                    // 3. 利用toString方法,并不是所有属性都有这个方法,谨慎使用
+                    /**
+                    下面在{}什么都不显示
+                    为什么React不让他们显示
+                    因为有些时候会在{}做判断,如果判断为真或者为假,可能会有让他们显示为null或							undefined,这样子的话,就可以让内容不进行渲染在页面上
+                    但如果要显示他们的话,可以将他们转换为字符串
+                   	转换为字符串的三种方法
+                   	*/
+                    1. String();
+                    2. 利用字面量 后面加上 "",用这个比较方便
+                    3. 利用toString方法,并不是所有属性都有这个方法,谨慎使用
                     test:null,
                     test2:undefined,
                     test3:true,
@@ -187,6 +189,10 @@
 ```
 
 ## 06---JSX嵌入表达式
+
+1. 运算表达式
+2. 三元运算符
+3. 执行一个函数
 
 ```jsx
     <script type="text/babel">
@@ -367,6 +373,21 @@
          - 存放在标签中的内容,以children数组的方式进行存储
          - 如果是多个元素
 
+```jsx
+<h1 name="czx" age={18}>
+  <h2></h2>
+  <h2></h2>
+</h1>
+/*-------------------代码转换过程------------------------*/
+/*#__PURE__*/
+React.createElement("h1", {
+  name: "czx",
+  age: 18
+}, /*#__PURE__*/React.createElement("h2", null), /*#__PURE__*/React.createElement("h2", null));
+```
+
+
+
 ## 02---虚拟DOM的创建过程
 
 1. 我们通过React.createElement最终创建出一个ReactElement对象
@@ -471,9 +492,15 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
    * 尽可能的将页面拆分成一个个小的,可复用的组件
    * 这样让我们的代码更加方便组织和管理,并且扩展性页更强
 2. React的组件相对于Vue的更加灵活和多样,按照不同的方式可以分成很多组件类
-   * 根据组件的定义方式,可以分为,函数组件(Functional Component)和类组件(Class Component);
-   * 根据组件内部是否有状态需要维护,可以分为:无状态组件(Stateless Component)和有状态组件(Stateful Component);
-   * 根据组件的不同职责,可以分成:展示性组件(Presentation Component)和容器性组件(Container Component)
+   * 根据组件的定义方式,可以分为,
+     1. <span style="color:skyBlue">函数组件(Functional Component)</span>
+     2. <span style="color:skyBlue">类组件(Class Component);</span>
+   * 根据组件内部是否有状态需要维护,可以分为:
+     1. <span style="color:skyBlue">无状态组件(Stateless Component)</span>
+     2. <span style="color:skyBlue">有状态组件(Stateful Component);</span>
+   * 根据组件的不同职责,可以分成
+     1. <span style="color:skyBlue">展示性组件(Presentation Component)</span>
+     2. <span style="color:skyBlue">容器性组件(Container Component)</span>
 
 ## 02-类组件
 
@@ -1024,6 +1051,21 @@ export default class App extends Component {
 }
 
 ```
+
+## 事件总线
+
+> 如果在开发中有跨组件之间的事件传递,可以用==事件总线==
+>
+> 使用
+>
+> `yarn add events`
+>
+> 常用API
+>
+> - 创建EventEmitter对象：eventBus对象；
+> - 发出事件：`eventBus.emit("事件名称", 参数列表);`
+> - 监听事件：`eventBus.addListener("事件名称", 监听函数)`；
+> - 移除事件：`eventBus.removeListener("事件名称", 监听函数)`；
 
 ## 12-SetState详解
 
