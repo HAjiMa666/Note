@@ -1,5 +1,3 @@
-# HTML
-
 ## 01-跨标签页通信有哪几种方式
 
 下面介绍的都是基于同源之间 进行通信的
@@ -105,3 +103,88 @@
 2. 每一个async属性的脚本都在它下载结束之后立即执行,同时会在window的load事件之前执行,所以可能出现顺序被打乱的情况
 3. defer的话再页面解析完毕之后,按照原本的顺序执行
 4. 当一个script标签内同时包含defer与async属性时,只会触发async,不会触发defer,除非浏览器不支持async
+
+## 05-iframe有什么缺点
+
+1. `iframe`会阻塞主页面的`onload`事件
+
+2. 搜索引擎的检索程序无法解读这种页面,不利于`seo`
+
+3. `iframe`和主页面共享连接池,而浏览器对于相同域的连接有限制,所以会影响页面的并行加载
+
+4. 使用`iframe`之前要考虑两个缺点,如果需要使用`iframe`,最好是通过`javaScript`
+
+5. 动态给`iframe`添加src属性,可以绕开以上两个问题
+
+![image-20210913113031219](https://gitee.com/IU_czx/images/raw/master/img/%E8%BF%9E%E6%8E%A5%E6%B1%A0%E8%A7%A3%E9%87%8A.png)
+
+## 06-Src和href的区别
+
+* `src`是用于替换当前元素,`href`用于在当前文档和引用资源之间确认联系
+
+* `src`是`source`的缩写,指向外部资源的位置,指向的内容将会嵌入到文档中当前标签所在的位置;在请求`src`资源时会将其指向的资源下载并应用到文档中,如`js`脚本,`img`图片,`iframe`等元素
+
+  ```js
+  <script src="js.js"></script>
+  ```
+
+  > 当浏览器解析到该元素时,会暂停其他资源的下载和处理,直到将该资源加载,编译,执行完毕,图片和框架等元素也是如此,类似于将所指向资源嵌入到当前标签内,这也是为什么js脚本放在底部和不是头部
+
+* `href`是`Hypertext Reference`的缩写,指向网络资源所在位置,建立和当前元素(锚点)或者当前文档(链接)之间的链接,如果我们在文档中添加
+
+  ```js
+  <link href=”common.css” rel=”stylesheet”/>
+  ```
+
+  > 浏览器会识别该文档为css文件,就会并行下载资源并且不会停止对当前文档的处理
+  >
+  > 这也是为什么会建议使用link的方式来加载css,而不是使用`@import`的方式 
+
+## 07-H5的新特性
+
+1. 画布(canvas)API
+
+2. 地理(Geolocation)API
+
+3. 音频和视频(audio和video)API
+
+4. `lcoalStorage`和`sessionStorage`
+
+5. `webworker`和`websocket`
+
+6. 新的一套标签
+
+   `header` `nav` `footer` `aside` `article` `section`
+
+7. `web worker`是运行在浏览器后台的js程序，他不影响主程序的运行，是另开的一个js线程，可以用这个线程执行复杂的数据操作，然后把操作结果通过postMessage传递给主线程，这样在进行复杂且耗时的操作时就不会阻塞主线程了。
+
+8. `HTML5 History`两个新增的API：`history.pushState` 和 `history.replaceState`，两个 API 都会操作浏览器的历史记录，而不会引起页面的刷新。
+
+> `Hash`就是`url` 中看到 `#` ,我们需要一个根据监听哈希变化触发的事件( `hashchange`) 事件。我们用 `window.location`处理哈希的改变时不会重新渲染页面，而是当作新页面加到历史记录中，这样我们跳转页面就可以在 hashchange 事件中注册 ajax 从而改变页面内容。 可以为hash的改变添加监听事件：
+
+```js
+window.addEventListener("hashchange", funcRef, false)
+```
+
+- `WebSocket` 使用`ws`或`wss`协议，`Websocket`是一个持久化的协议，相对于HTTP这种非持久的协议来说。WebSocket API最伟大之处在于服务器和客户端可以在给定的时间范围内的任意时刻，相互推送信息。`WebSocket`并不限于以Ajax(或XHR)方式通信，因为Ajax技术需要客户端发起请求，而WebSocket服务器和客户端可以彼此相互推送信息；XHR受到域的限制，而`WebSocket`允许跨域通信
+
+```js
+// 创建一个Socket实例
+var socket = new WebSocket('ws://localhost:8080');
+// 打开Socket
+socket.onopen = function(event) {
+  // 发送一个初始化消息
+  socket.send('I am the client and I\'m listening!');
+  // 监听消息
+  socket.onmessage = function(event) {
+    console.log('Client received a message',event);
+  };
+  // 监听Socket的关闭
+  socket.onclose = function(event) {
+    console.log('Client notified socket has closed',event);
+  };
+  // 关闭Socket....
+  //socket.close()
+};
+```
+
