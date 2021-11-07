@@ -648,6 +648,107 @@ echo $SUM
 5. 字符串比较
 
    ![image-20210926151356031](https://gitee.com/IU_czx/images/raw/master/img/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83.png)
-   6.
    
+
+# LinuxC语言开发工具
+
+## 函数介绍
+
+### printf函数
+
+![image-20211014082835813](https://gitee.com/IU_czx/images/raw/master/img/C%E8%AF%AD%E8%A8%80Printf%E5%87%BD%E6%95%B0.png)
+
+### scanf函数说明
+
+![image-20211014084005491](https://gitee.com/IU_czx/images/raw/master/img/scanf%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E.png)
+
+### getchar参数
+
+![image-20211014084455353](https://gitee.com/IU_czx/images/raw/master/img/getchar%E5%87%BD%E6%95%B0.png)
+
+### putchar函数说明
+
+![image-20211014084543302](https://gitee.com/IU_czx/images/raw/master/img/putchar%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E.png)
+
+## 使用gcc
+
+> 命令 `gcc [参数] 要编译的文件 [参数] [目标的文件]`
+
+## gcc编译流程
+
+### 00 支持编译的一些源文件
+
+![image-20211014083356471](https://gitee.com/IU_czx/images/raw/master/img/gcc%E6%94%AF%E6%8C%81%E7%BC%96%E8%AF%91%E7%9A%84%E6%BA%90%E6%96%87%E4%BB%B6.png)
+
+
+
+### 01-编写源代码
+
+在这写入你的源代码
+
+### 02-预处理阶段
+
+使用 `-E`参数进行控制 使得在预处理阶段停止编译过程
+
+### 03-编译阶段
+
+1. 检查代码的规范性,是否有语法错误
+2. 翻译成汇编语言
+3. 可以使用  `-S`控制生成汇编代码
+
+### 04-汇编阶段
+
+* 将汇编代码转换为`.o`的二进制代码
+
+### 05-链接阶段
+
+将我们使用的库函数链接起来
+
+![image-20211014083920555](https://gitee.com/IU_czx/images/raw/master/img/gcc%E9%93%BE%E6%8E%A5%E9%98%B6%E6%AE%B5.png)
+
+## gcc编译器的主要参数
+
+### 总体参数
+
+![image-20211014084050366](https://gitee.com/IU_czx/images/raw/master/img/gcc%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0.png)
+
+---
+
+如果是引入自己定义的库 
+
+需要 `#include "my.h"`这么写,这样就不需要添加`-L`参数了
+
+### gcc的常用警告和出错参数
+
+![image-20211014084649690](https://gitee.com/IU_czx/images/raw/master/img/gcc%E7%9A%84%E5%B8%B8%E7%94%A8%E8%AD%A6%E5%91%8A%E5%92%8C%E5%87%BA%E9%94%99%E5%8F%82%E6%95%B0.png)
+
+---
+
+eg:`gcc 3-6.c –o 3-6 –pedantic`
+
+### 优化参数
+
+![image-20211014085124129](https://gitee.com/IU_czx/images/raw/master/img/%E4%BC%98%E5%8C%96%E5%8F%82%E6%95%B0.png)
+
+eg `gcc 3-8.c -o 3.8 -O2`
+
+案例
+
+设计一个程序，要求循环8亿次左右，每次都有一些可以优化的加减乘除运算。比较gcc的编译参数“-On”优化程序前后的运行速度
+
+![image-20211014085459682](C:\Users\15461\AppData\Roaming\Typora\typora-user-images\image-20211014085459682.png)
+
+以下场景不需要使用优化参数
+
+1. 开发环境下
+2. 资源受限下
+3. 跟踪调试时
+
+## 函数库
+
+> 函数库是一组预先编译好的函数的集合，库文件的名字总是以lib开头.
+
+### 静态库
+
+![image-20211014085916390](https://gitee.com/IU_czx/images/raw/master/img/%E9%9D%99%E6%80%81%E5%BA%93.png)
 

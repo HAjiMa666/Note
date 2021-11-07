@@ -1,0 +1,22 @@
+# 什么是Node.js
+
+Node和JS浏览器中的差异
+
+![image-20211012153246358](https://gitee.com/IU_czx/images/raw/master/img/node%E5%92%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%B7%AE%E5%BC%82.png)
+
+Node的架构
+
+![image-20211012153358867](https://gitee.com/IU_czx/images/raw/master/img/Node%E7%9A%84%E6%9E%B6%E6%9E%84.png)
+
+# Node的版本工具
+
+1. 快速切换Node版本 可以借助一些工具 但是这两个工具不支持Windows
+   1. nvm: Node Version Manager
+   2. n: Interactively Manage Your Node.js Versions
+
+## Node的REPL
+
+* REPL是Read-Eval-Print Loop的简称,翻译为 "读取-求值-输出" 循环
+
+* REPL是一个简单的,交互式的编程环境
+* 就是和命令行差不多的东西
